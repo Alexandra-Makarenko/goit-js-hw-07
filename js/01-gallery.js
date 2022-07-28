@@ -20,15 +20,18 @@ const gallery = document.querySelector('.gallery');
 
 gallery.innerHTML += markup;
 
+
  const handler = (event) => {
     event.preventDefault();
     console.log(event.target.dataset.source);
     const instance = basicLightbox.create(`
     <img src="${event.target.dataset.source}" width="800" height="600">
 `)
-instance.show()
-}
+   
+  document.addEventListener("keydown", instance.close)
+  instance.show()
+ }
+
 
 gallery.addEventListener('click',handler);
-
 

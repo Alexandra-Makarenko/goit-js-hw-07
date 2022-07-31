@@ -18,17 +18,39 @@ const markup = galleryItems
 
 const gallery = document.querySelector('.gallery');
 
-gallery.innerHTML += markup;
-
+gallery.insertAdjacentHTML('beforeend',markup)
 
  const handler = (event) => {
     event.preventDefault();
     console.log(event.target.dataset.source);
     const instance = basicLightbox.create(`
     <img src="${event.target.dataset.source}" width="800" height="600">
-`)
-   
-  document.addEventListener("keydown", instance.close)
+`,
+     {
+	/*
+	 * Prevents the lightbox from closing when clicking its background.
+	 */
+	closable: true,
+	/*
+	 * One or more space separated classes to be added to the basicLightbox element.
+	 */
+	className: '',
+	/*
+	 * Function that gets executed before the lightbox will be shown.
+	 * Returning false will prevent the lightbox from showing.
+	 */
+	onShow: (instance) => {document.addEventListener('keypress', (e) => {
+  if (e.code === "Escape") instance.close()
+})},
+	/*
+	 * Function that gets executed before the lightbox closes.
+	 * Returning false will prevent the lightbox from closing.
+	 */
+	onClose: (instance) => {}
+}
+    )
+ 
+ 
   instance.show()
  }
 

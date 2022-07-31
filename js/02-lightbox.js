@@ -12,7 +12,7 @@ const markup = galleryItems
 
 const gallery = document.querySelector('.gallery');
 
-gallery.innerHTML += markup;
+gallery.insertAdjacentHTML('beforeend',markup)
 var lightbox = new SimpleLightbox('.gallery a', {
     captions: true,
     captionType: 'attr',
@@ -22,4 +22,3 @@ var lightbox = new SimpleLightbox('.gallery a', {
 });
 
 
-// gallery.addEventListener('click',handler);
